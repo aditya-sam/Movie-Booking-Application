@@ -1,13 +1,14 @@
-import React from 'react';
-import "./common/header/Header.css";
-import logo from "./assets/logo.svg";
+import React, { Component } from "react";
+import MovieLogo from "../../assets/logo.svg";
+import "./Header.css";
 
-class Header extends React.Component {
-    render() {
-        return <div className="header">
-            <img src={logo} />
-        </div>
-    }
+class Header extends Component {
+  render() {
+    return (
+      <div class="header">
+        <img src={MovieLogo} alt="logo" id="image" />
+      </div>
+    );
+  }
 }
-
 export default Header;
