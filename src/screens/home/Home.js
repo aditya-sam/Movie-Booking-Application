@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from 'react-dom';
 import Header from "../../common/header/Header.js";
 import "./Home.css";
 import { withStyles } from '@material-ui/core/styles';
@@ -20,6 +21,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import artists from "../../common/artists";
 import genres from '../../common/genre';
+import Details from '../details/Details';
 
 
 const styles = theme => ({
@@ -91,7 +93,7 @@ class Home extends Component {
     }
 
     movieClickHandler = (movieId) => {
-        this.props.history.push('/movie/' + movieId);
+        ReactDOM.render(<Details movieId={movieId} />, document.getElementById('root'));
     }
 
 
@@ -129,20 +131,12 @@ class Home extends Component {
                 <div className="flex-container">
                     <div className="left">
                         <GridList cellHeight={350} cols={4} className={classes.gridListMain}>
-                            {filterMovie.map((movie) => (
-                                <GridListTile className="released-movie-grid-item" key={"grid" + movie.id}>
-                                    <img
-                                        src={movie.poster_url}
-                                        className="movie-poster2"
-                                        alt={movie.title}
-                                    />
+                            {moviesData.map(movie => (
+                                <GridListTile onClick={() => this.movieClickHandler(movie.id)} className="released-movie-grid-item" key={"grid" + movie.id}>
+                                    <img src={movie.poster_url} className="movie-poster" alt={movie.title} />
                                     <GridListTileBar
                                         title={movie.title}
-                                        subtitle={
-                                            <span>
-                                                Release Date: {new Date(movie.release_date).toDateString()}
-                                            </span>
-                                        }
+                                        subtitle={<span>Release Date: {new Date(movie.release_date).toDateString()}</span>}
                                     />
                                 </GridListTile>
                             ))}
